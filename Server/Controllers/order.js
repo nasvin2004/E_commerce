@@ -61,6 +61,8 @@ const addOrder = async (req, res) => {
         });
 
         await orderData.save();
+        
+        await cartModel.findOneAndDelete({userId})
         res.status(201).json({ message: "Order created successfully", orderData });
     } catch (err) {
         res.status(500).json({ error: err.message });
